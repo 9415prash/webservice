@@ -21,6 +21,15 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+      - name: Build login-motion-lab
+        working-directory: login-motion-lab
+        run: |
+          npm ci
+          npm run build
+      - name: Publish login-motion-lab under /login-motion-lab/
+        run: |
+          mkdir -p dist/login-motion-lab
+          cp -r login-motion-lab/dist/. dist/login-motion-lab/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
